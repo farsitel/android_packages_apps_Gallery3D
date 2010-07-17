@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+	<string name="app_name">گالری</string>
+	<string-array name="months_abbreviated">
+		<item>Jan</item>
+		<item>Feb</item>
+		<item>Mar</item>
+		<item>Apr</item>
+		<item>May</item>
+		<item>Jun</item>
+		<item>Jul</item>
+		<item>Aug</item>
+		<item>Sep</item>
+		<item>Oct</item>
+		<item>Nov</item>
+		<item>Dec</item>
+	</string-array>
+	<!-- Title for picture frame gadget to show in list of all available gadgets -->
+    <string name="gadget_title">قاب عکس</string>
+
+	<!-- Used to format short video duration in Details dialog. minutes:seconds e.g. 00:30 -->
+    <string name="details_ms">%1$02d:%2$02d</string>
+    <!-- Used to format video duration in Details dialog. hours:minutes:seconds e.g. 0:21:30 -->
+    <string name="details_hms">%1$d:%2$02d:%3$02d</string>
+    <!-- Activity label. This might show up in the activity-picker -->
+    <string name="movie_view_label">فیلم‌ها</string>
+    <!-- shown in the video player view while the video is being loaded, before it starts playing -->
+    <string name="loading_video">در حال بار کردن فیلم\u2026</string>
+    <!-- Movie View Resume Playing dialog title -->
+    <string name="resume_playing_title">ادامهٔ فیلم</string>
+
+    <!-- Movie View Start Playing dialog title -->
+    <string name="resume_playing_message">ادامهٔ فیلم از %s پخش شود؟</string>
+    <!-- Movie View Start Playing button "Resume from bookmark" -->
+    <string name="resume_playing_resume">ادامهٔ پخش</string>
+
+    <!-- Movie View Start Playing button "Beginning" -->
+    <string name="resume_playing_restart">شروع مجدد</string>
+	<string name="camera">دوربین</string>
+
+	<!-- Button indicating that the cropped image should be saved -->
+	<string name="crop_save_text">ذخیره</string>
+	<!-- Button indicating that the cropped image should be reverted back to the original -->
+	<string name="crop_discard_text">دور انداختن</string>
+	<!-- Hint that appears when cropping an image with more than one face -->
+	<string name="multiface_crop_help">برای شروع یک صورت را لمس کنید.</string>
+	<!-- Toast/alert that the image is being saved to the SD card -->
+	<string name="saving_image">در حال ذخیره‌سازی تصویر\u2026</string>
+	<!-- menu pick: crop the currently selected image -->
+	<string name="crop_label">بریدن تصویر</string>
+	<!-- Toast/alert that the face detection is being run -->
+	<string name="running_face_detection">لطفا صبر کنید\u2026</string>
+
+	<!-- Displayed in the title of the dialog for things to do with a picture
+		 that is to be "set as" (e.g. set as contact photo or set as wallpaper) -->
+	<string name="set_image">انتخاب تصویر به عنوان</string>
+	<!-- Toast/alert after saving wallpaper -->
+	<string name="wallpaper">در حال تنظیم کاغذ دیواری، لطفا صبر کنید\u2026</string>
+    <string name="camera_setas_wallpaper">کاغذ دیواری</string>
+
+    <!-- Details dialog "OK" button. Dismisses dialog. -->
+    <string name="details_ok">قبول</string>
+    <string name="loading_new">در حال بار کردن آلبوم‌ها و تصاویر جدید</string>
+    <string name="initializing">در حال بار کردن</string>
+    <string name="pick_prompt">انتخاب یک مورد از مجموعهٔ شما</string>
+    <string name="no_items">در مجموعهٔ شما هیچ موردی وجود ندارد</string>
+    <string name="pick">انتخاب</string>
+    <string name="delete">حذف</string>
+    <string name="confirm_delete">تأیید حذف</string>
+    <string name="cancel">لغو</string>
+    <string name="share">اشتراک گذاری</string>
+    <string name="no_sd_card">کارت حافظه سوار نیست یا موجود نیست</string>
+
+	<!-- String indicating more actions are available -->
+    <string name="more">بیشتر</string>
+    <string name="select_all">انتخاب همه</string>
+    <string name="deselect_all">عدم انتخاب همه</string>
+    <string name="slideshow">نمایش اسلایدی</string>
+
+    <string name="menu">منو</string>
+    <string name="details">جزئیات</string>
+
+    <!-- String appended at the end depending upon what is selected eg. 1 album selected -->
+    <string name="album_selected">آلبوم انتخاب شد</string>
+    <string name="item_selected">مورد انتخاب شد</string>
+    <string name="albums_selected">آلبوم‌ها انتخاب شدند</string>
+    <string name="items_selected">موارد انتخاب شدند</string>
+
+    <string name="album">آلبوم</string>
+    <string name="start">شروع</string>
+    <string name="end">پایان</string>
+    <string name="location">مکان</string>
+    <string name="location_unknown">مکان نامشخص</string>
+    <string name="title">عنوان</string>
+    <string name="type">نوع</string>
+
+    <!-- String indicating timestamp of photo or video -->
+    <string name="taken_on">گرفته شده در</string>
+    <string name="added_on">اضافه شده در</string>
+    <string name="show_on_map">نمایش در نقشه</string>
+    <string name="rotate_left">چرخاندن به چپ</string>
+    <string name="rotate_right">چرخانده به راست</string>
+    <string name="crop">بریدن</string>
+    <string name="set_as">انتخاب به عنوان</string>
+    <string name="set_as_wallpaper">انتخاب به عنوان کاغذ دیواری</string>
+    <string name="item">مورد</string>
+    <string name="items">موارد</string>
+
+    <!-- String indicating an approximate location eg. Around Palo Alto, CA -->
+    <string name="around">حوالی</string>
+    <string name="date_unknown">تاریخ نامشخص</string>
+    <string name="video_err">نمی‌توان فیلم را پخش کرد</string>
+</resources>
