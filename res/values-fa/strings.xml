@@ -77,7 +77,7 @@
     <string name="details_ok">قبول</string>
     <string name="loading_new">در حال بار کردن آلبوم‌ها و تصاویر جدید</string>
     <string name="initializing">در حال بار کردن</string>
-    <string name="pick_prompt">انتخاب یک مورد از مجموعهٔ شما</string>
+    <string name="pick_prompt">یک مورد از مجموعه انتخاب کنید</string>
     <string name="no_items">در مجموعهٔ شما موردی وجود ندارد</string>
     <string name="pick">انتخاب</string>
     <string name="delete">حذف</string>
