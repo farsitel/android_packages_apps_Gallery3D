@@ -29,6 +29,7 @@ import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.util.FloatMath;
 import android.text.FriBidi;
+import android.text.format.Jalali;
 
 import java.util.Locale;
 import java.util.Locale;
@@ -82,7 +83,7 @@ public final class StringTexture extends Texture {
 
     public StringTexture(String string) {
         mString = string;
-        mFriBidi = new FriBidi(mString);
+        mFriBidi = new FriBidi(Jalali.persianDigitsIfPersian(mString));
         mFriBidi.reorderOnce();
         if ("fa".equals(Locale.getDefault().getLanguage())
         	|| "ar".equals(Locale.getDefault().getLanguage())
@@ -98,7 +99,7 @@ public final class StringTexture extends Texture {
 
     public StringTexture(String string, Config config, int width, int height) {
         mString = string;
-        mFriBidi = new FriBidi(mString);
+        mFriBidi = new FriBidi(Jalali.persianDigitsIfPersian(mString));
         mFriBidi.reorderOnce();
         if ("fa".equals(Locale.getDefault().getLanguage())
             	|| "ar".equals(Locale.getDefault().getLanguage())
