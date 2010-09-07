@@ -125,4 +125,6 @@
     <string name="around">Around</string>
     <string name="date_unknown">Date unknown</string>
     <string name="video_err">Unable to play video</string>
+
+    <string name="date_and_time">%Y/%-m/%-e %H:%M</string>
 </resources>

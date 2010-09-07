@@ -17,7 +17,6 @@
 package com.cooliris.media;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.res.Resources;
 import android.media.ExifInterface;
+import android.text.format.DateFormat;
 
 import com.cooliris.app.App;
 import com.cooliris.app.Res;
@@ -89,7 +89,7 @@ public final class DetailMode {
             strings.add(Integer.toString(numItems) + " " + resources.getString(Res.string.items_selected));
         }
 
-        DateFormat dateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
+        String dateTimeFormat = resources.getString(Res.string.date_and_time);
 
         // Start and end times of the selected items.
         if (selectedItemsSet.areTimestampsAvailable()) {
@@ -99,8 +99,8 @@ public final class DetailMode {
                 minTimestamp -= App.CURRENT_TIME_ZONE.getOffset(minTimestamp);
                 maxTimestamp -= App.CURRENT_TIME_ZONE.getOffset(maxTimestamp);
             }
-            strings.add(resources.getString(Res.string.start) + ": " + dateTimeFormat.format(new Date(minTimestamp)));
-            strings.add(resources.getString(Res.string.end) + ": " + dateTimeFormat.format(new Date(maxTimestamp)));
+            strings.add(resources.getString(Res.string.start) + ": " + DateFormat.format(dateTimeFormat, new Date(minTimestamp), context));
+            strings.add(resources.getString(Res.string.end) + ": " + DateFormat.format(dateTimeFormat, new Date(maxTimestamp), context));
         } else if (selectedItemsSet.areAddedTimestampsAvailable()) {
             long minTimestamp = selectedItemsSet.mMinAddedTimestamp;
             long maxTimestamp = selectedItemsSet.mMaxAddedTimestamp;
@@ -108,8 +108,8 @@ public final class DetailMode {
                 minTimestamp -= App.CURRENT_TIME_ZONE.getOffset(minTimestamp);
                 maxTimestamp -= App.CURRENT_TIME_ZONE.getOffset(maxTimestamp);
             }
-            strings.add(resources.getString(Res.string.start) + ": " + dateTimeFormat.format(new Date(minTimestamp)));
-            strings.add(resources.getString(Res.string.end) + ": " + dateTimeFormat.format(new Date(maxTimestamp)));
+            strings.add(resources.getString(Res.string.start) + ": " + DateFormat.format(dateTimeFormat, new Date(minTimestamp), context));
+            strings.add(resources.getString(Res.string.end) + ": " + DateFormat.format(dateTimeFormat, new Date(maxTimestamp), context));
         } else {
             strings.add(resources.getString(Res.string.start) + ": " + resources.getString(Res.string.date_unknown));
             strings.add(resources.getString(Res.string.end) + ": " + resources.getString(Res.string.date_unknown));
@@ -145,7 +145,7 @@ public final class DetailMode {
         strings[0] = resources.getString(Res.string.title) + ": " + item.mCaption;
         strings[1] = resources.getString(Res.string.type) + ": " + item.getDisplayMimeType();
 
-        DateFormat dateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
+        String dateTimeFormat = resources.getString(Res.string.date_and_time);
 
         if (item.mLocaltime == null) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
@@ -166,13 +166,13 @@ public final class DetailMode {
         }
 
         if (item.mLocaltime != null) {
-            strings[2] = resources.getString(Res.string.taken_on) + ": " + dateTimeFormat.format(item.mLocaltime);
+            strings[2] = resources.getString(Res.string.taken_on) + ": " + DateFormat.format(dateTimeFormat, item.mLocaltime, context);
         } else if (item.isDateTakenValid()) {
             long dateTaken = item.mDateTakenInMs;
             if (item.isPicassaItem()) {
                 dateTaken -= App.CURRENT_TIME_ZONE.getOffset(dateTaken);
             }
-            strings[2] = resources.getString(Res.string.taken_on) + ": " + dateTimeFormat.format(new Date(dateTaken));
+            strings[2] = resources.getString(Res.string.taken_on) + ": " + DateFormat.format(dateTimeFormat, new Date(dateTaken), context);
         } else if (item.isDateAddedValid()) {
             long dateAdded = item.mDateAddedInSec * 1000;
             if (item.isPicassaItem()) {
@@ -181,7 +181,7 @@ public final class DetailMode {
             // TODO: Make this added_on as soon as translations are ready.
             // strings[2] = resources.getString(Res.string.added_on) + ": " +
             // DateFormat.format("h:mmaa MMM dd yyyy", dateAdded);
-            strings[2] = resources.getString(Res.string.taken_on) + ": " + dateTimeFormat.format(new Date(dateAdded));
+            strings[2] = resources.getString(Res.string.taken_on) + ": " + DateFormat.format(dateTimeFormat, new Date(dateAdded), context);
         } else {
             strings[2] = resources.getString(Res.string.taken_on) + ": " + resources.getString(Res.string.date_unknown);
         }
