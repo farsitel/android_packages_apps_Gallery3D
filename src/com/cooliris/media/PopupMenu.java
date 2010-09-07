@@ -248,7 +248,7 @@ public final class PopupMenu extends Layer {
         }
 
         // Resize the popup menu.
-        setSize(right + PADDING_RIGHT * App.PIXEL_DENSITY, top + PADDING_BOTTOM * App.PIXEL_DENSITY);
+        setSize(right + (PADDING_RIGHT + PADDING_LEFT) * App.PIXEL_DENSITY, top + PADDING_BOTTOM * App.PIXEL_DENSITY);
 
     }
 
