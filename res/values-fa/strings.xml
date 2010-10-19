@@ -77,13 +77,13 @@
     <string name="details_ok">خُب</string>
     <string name="loading_new">آماده‌سازی آلبوم‌ها و عکس‌های جدید</string>
     <string name="initializing">در حال آماده‌سازی</string>
-    <string name="pick_prompt">یک تصویر از مجموعه انتخاب نمایید.</string>
+    <string name="pick_prompt">یک تصویر از مجموعه انتخاب کنید.</string>
     <string name="no_items">تصویری در مجموعه وجود ندارد.</string>
     <string name="pick">انتخاب</string>
     <string name="delete">حذف</string>
     <string name="confirm_delete">تأیید</string>
     <string name="cancel">انصراف</string>
-    <string name="share">اشتراک گذاری</string>
+    <string name="share">اشتراک‌گذاری</string>
     <string name="no_sd_card">کارت حافظه متصل نیست.</string>
 
     <!-- String indicating more actions are available -->
