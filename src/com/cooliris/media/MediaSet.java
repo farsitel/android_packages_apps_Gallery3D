@@ -17,6 +17,7 @@
 package com.cooliris.media;
 
 import java.util.ArrayList;
+import android.text.format.Jalali;
 
 public class MediaSet {
     public static final int TYPE_SMART = 0;
@@ -161,7 +162,7 @@ public class MediaSet {
         if (mName == null) {
             mName = "";
         }
-        String size = (mNumExpectedItemsCountAccurate) ? "  (" + mNumExpectedItems + ")" : "";
+        String size = (mNumExpectedItemsCountAccurate) ? Jalali.persianDigitsIfPersian("  (" + mNumExpectedItems + ")") : "";
         mTitleString = mName + size;
         if (truncateTitle) {
             int length = mName.length();

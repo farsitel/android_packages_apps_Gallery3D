@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 import javax.microedition.khronos.opengles.GL11;
 
@@ -32,6 +33,8 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.text.format.Jalali;
+import android.text.format.JalaliDate;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 
@@ -64,6 +67,7 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
     private final SparseArray<StringTexture> mYearLabels = new SparseArray<StringTexture>();
     private StringTexture mDateUnknown;
     private final StringTexture[] mMonthLabels = new StringTexture[12];
+    private final StringTexture[] mJalaliMonthLabels = new StringTexture[12];
     private final StringTexture[] mDayLabels = new StringTexture[32];
     private final StringTexture[] mOpaqueDayLabels = new StringTexture[32];
     private final StringTexture mDot = new StringTexture("\ufffd");
@@ -75,6 +79,7 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
     private NinePatch mBackground;
     private Rect mBackgroundRect;
     private BitmapTexture mBackgroundTexture;
+    private boolean mJalali = false;
 
     public interface Listener {
         public void onTimeChanged(TimeBar timebar);
@@ -95,15 +100,20 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
     }
 
     public void regenerateStringsForContext(Context context) {
+        mJalali = Jalali.isJalali(context);
         // Create textures for month names.
         String[] months = context.getResources().getStringArray(Res.array.months_abbreviated);
+        String[] jalali_months = context.getResources().getStringArray(Res.array.jalali_months_abbreviated);
         for (int i = 0; i < months.length; ++i) {
             mMonthLabels[i] = new StringTexture(months[i], mMonthYearFormat);
         }
+        for (int i = 0; i < jalali_months.length; ++i) {
+            mJalaliMonthLabels[i] = new StringTexture(jalali_months[i], mMonthYearFormat);
+        }
 
         for (int i = 0; i <= 31; ++i) {
-            mDayLabels[i] = new StringTexture(Integer.toString(i), mDayFormat);
-            mOpaqueDayLabels[i] = new StringTexture(Integer.toString(i), mMonthYearFormat);
+            mDayLabels[i] = new StringTexture(Jalali.persianDigitsIfPersian(Integer.toString(i)), mDayFormat);
+            mOpaqueDayLabels[i] = new StringTexture(Jalali.persianDigitsIfPersian(Integer.toString(i)), mMonthYearFormat);
         }
         mDateUnknown = new StringTexture(context.getResources().getString(Res.string.date_unknown), mMonthYearFormat);
         mBackgroundTexture = null;
@@ -399,9 +409,19 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
             if (mInDrag || mAnimTextAlpha != 0.0f) {
                 Marker anchor = getAnchorMarker();
                 if (anchor != null) {
-                    Texture month = mMonthLabels[anchor.month];
-                    Texture day = mOpaqueDayLabels[anchor.day];
-                    Texture year = getYearLabel(anchor.year);
+                    JalaliDate jDate = Jalali.gregorianToJalali(anchor.year, anchor.month + 1, anchor.day);
+                    Texture month;
+                    Texture day;
+                    Texture year;
+                    if (mJalali) {
+                        month = mJalaliMonthLabels[jDate.month - 1];
+                        day = mOpaqueDayLabels[jDate.day];
+                        year = getYearLabel(jDate.year);
+                    } else {
+                        month = mMonthLabels[anchor.month];
+                        day = mOpaqueDayLabels[anchor.day];
+                        year = getYearLabel(anchor.year);
+                    }
                     boolean validDate = true;
                     if (anchor.year <= 1970) {
                         month = mDateUnknown;
@@ -442,12 +462,22 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
                     }
                     y = view.getHeight() * 0.5f;
                     x = (view.getWidth() - expectedWidth) / 2;
-                    view.draw2D(month, x, y);
-                    if (validDate) {
-                        x += month.getWidth() + 3 * App.PIXEL_DENSITY;
-                        view.draw2D(day, x, y);
-                        x += day.getWidth() + 7 * App.PIXEL_DENSITY;
+                    if ("fa".equals(Locale.getDefault().getLanguage())) {
                         view.draw2D(year, x, y);
+                        if (validDate) {
+                            x += year.getWidth() + 3 * App.PIXEL_DENSITY;
+                            view.draw2D(month, x, y);
+                            x += month.getWidth() + 7 * App.PIXEL_DENSITY;
+                            view.draw2D(day, x, y);
+                        }
+                    } else {
+                        view.draw2D(month, x, y);
+                        if (validDate) {
+                            x += month.getWidth() + 3 * App.PIXEL_DENSITY;
+                            view.draw2D(day, x, y);
+                            x += day.getWidth() + 7 * App.PIXEL_DENSITY;
+                            view.draw2D(year, x, y);
+                        }
                     }
                     if (mAnimTextAlpha != 1f) {
                         gl.glColor4f(1f, 1f, 1f, 1f);
@@ -524,11 +554,11 @@ public final class TimeBar extends Layer implements MediaFeed.Listener {
     }
 
     private StringTexture getYearLabel(int year) {
-        if (year <= 1970)
+        if (((year <= 1970) && (year >= 1400)) || (year < 1350))
             return mDot;
         StringTexture label = mYearLabels.get(year);
         if (label == null) {
-            label = new StringTexture(Integer.toString(year), mMonthYearFormat);
+            label = new StringTexture(Jalali.persianDigitsIfPersian(Integer.toString(year)), mMonthYearFormat);
             mYearLabels.put(year, label);
         }
         return label;

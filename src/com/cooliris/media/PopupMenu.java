@@ -325,7 +325,9 @@ public final class PopupMenu extends Layer {
             int selectedItem = mSelectedItem;
             if (selectedItem != -1) {
                 Option option = options[selectedItem];
-                mHighlightSelected.draw(canvas, option.mDrawable.getBounds());
+                Rect bound = new Rect(option.mDrawable.getBounds());
+                bound.right += PADDING_LEFT * App.PIXEL_DENSITY;
+                mHighlightSelected.draw(canvas, bound);
             }
 
             // Draw icons and titles.
