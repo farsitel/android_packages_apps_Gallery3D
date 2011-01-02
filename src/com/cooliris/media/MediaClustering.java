@@ -306,8 +306,8 @@ public final class MediaClustering {
                         minTimestamp -= App.CURRENT_TIME_ZONE.getOffset(minTimestamp);
                         maxTimestamp -= App.CURRENT_TIME_ZONE.getOffset(maxTimestamp);
                     }
-                    String minDay = DateFormat.format(MMDDYY_FORMAT, minTimestamp).toString();
-                    String maxDay = DateFormat.format(MMDDYY_FORMAT, maxTimestamp).toString();
+                    String minDay = DateFormat.format(MMDDYY_FORMAT, minTimestamp, context).toString();
+                    String maxDay = DateFormat.format(MMDDYY_FORMAT, maxTimestamp, context).toString();
 
                     if (minDay.substring(4).equals(maxDay.substring(4))) {
                         // The items are from the same year - show at least as

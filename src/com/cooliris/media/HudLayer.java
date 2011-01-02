@@ -32,6 +32,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.text.format.Jalali;
 import android.util.FloatMath;
 import android.view.MotionEvent;
 
@@ -411,7 +412,7 @@ public final class HudLayer extends Layer {
 
     public void updateNumItemsSelected(int numItems) {
         String items = " " + ((numItems == 1) ? mContext.getString(Res.string.item) : mContext.getString(Res.string.items));
-        Menu menu = new MenuBar.Menu.Builder(numItems + items).config(MenuBar.MENU_TITLE_STYLE_TEXT).build();
+        Menu menu = new MenuBar.Menu.Builder(Jalali.persianDigitsIfPersian(numItems + items)).config(MenuBar.MENU_TITLE_STYLE_TEXT).build();
         mSelectionMenuTop.updateMenu(menu, 1);
     }
 
@@ -675,7 +676,7 @@ public final class HudLayer extends Layer {
         // mGeo.enqueue(request);
         if (item == null)
             return;
-        String location = index + "/" + count;
+        String location = Jalali.persianDigitsIfPersian(index + mContext.getResources().getString(Res.string.number_slash) + count);
         mCachedCaption = item.mCaption;
         mCachedPosition = location;
         mCachedCurrentLabel = location;

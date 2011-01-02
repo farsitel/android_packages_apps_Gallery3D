@@ -248,7 +248,7 @@ public final class PopupMenu extends Layer {
         }
 
         // Resize the popup menu.
-        setSize(right + PADDING_RIGHT * App.PIXEL_DENSITY, top + PADDING_BOTTOM * App.PIXEL_DENSITY);
+        setSize(right + (PADDING_RIGHT + PADDING_LEFT) * App.PIXEL_DENSITY, top + PADDING_BOTTOM * App.PIXEL_DENSITY);
 
     }
 
@@ -325,7 +325,9 @@ public final class PopupMenu extends Layer {
             int selectedItem = mSelectedItem;
             if (selectedItem != -1) {
                 Option option = options[selectedItem];
-                mHighlightSelected.draw(canvas, option.mDrawable.getBounds());
+                Rect bound = new Rect(option.mDrawable.getBounds());
+                bound.right += PADDING_LEFT * App.PIXEL_DENSITY;
+                mHighlightSelected.draw(canvas, bound);
             }
 
             // Draw icons and titles.
